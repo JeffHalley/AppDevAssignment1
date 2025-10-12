@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.appdevassignment1.databinding.ActivityPlacemarkBinding
-import ie.setu.appdevassignment1.models.PlacemarkModel
+import ie.setu.appdevassignment1.models.DeviceModel
 import timber.log.Timber
 import timber.log.Timber.i
 
-class PlacemarkActivity : AppCompatActivity() {
+class DeviceActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlacemarkBinding
-    var placemark = PlacemarkModel()
+    var device = DeviceModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +21,15 @@ class PlacemarkActivity : AppCompatActivity() {
 
         Timber.plant(Timber.DebugTree())
 
-        i("Placemark Activity started...")
+        i("Iot Device Activity started...")
 
         binding.btnAdd.setOnClickListener() {
-            placemark.title = binding.placemarkTitle.text.toString()
-            placemark.description = binding.placemarkDescription.text.toString()
+            device.title = binding.deviceTitle.text.toString()
+            device.description = binding.deviceDescription.text.toString()
 
-            if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                i("add Button Pressed: ${placemark.title}")
-                i("Add description button pressed: ${placemark.description} ")
+            if (device.title.isNotEmpty() && device.description.isNotEmpty()) {
+                i("add Button Pressed: ${device.title}")
+                i("Add description button pressed: ${device.description} ")
             } else {
                 Snackbar
                     .make(it, "Incomplete Data", Snackbar.LENGTH_LONG)
