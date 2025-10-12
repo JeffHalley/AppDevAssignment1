@@ -3,20 +3,20 @@ package ie.setu.appdevassignment1.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import ie.setu.appdevassignment1.databinding.ActivityPlacemarkBinding
+import ie.setu.appdevassignment1.databinding.ActivityDeviceBinding
 import ie.setu.appdevassignment1.models.DeviceModel
 import timber.log.Timber
 import timber.log.Timber.i
 
 class DeviceActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPlacemarkBinding
+    private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityPlacemarkBinding.inflate(layoutInflater)
+        binding = ActivityDeviceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         Timber.plant(Timber.DebugTree())
