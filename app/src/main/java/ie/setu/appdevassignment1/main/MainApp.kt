@@ -2,6 +2,7 @@ package ie.setu.appdevassignment1.main
 
 import android.app.Application
 import ie.setu.appdevassignment1.models.DeviceModel
+import org.json.JSONArray
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -14,11 +15,30 @@ class MainApp : Application() {
         Timber.plant(Timber.DebugTree())
         i("Device app started")
 
-        devices.add(DeviceModel("Temperature Sensor", "Monitors ambient temperature in real time"))
-        devices.add(DeviceModel("pH Sensor", "Measures water acidity for environmental monitoring"))
-        devices.add(DeviceModel("Ultrasonic Sensor", "Used for distance and obstacle detection"))
-        devices.add(DeviceModel("Smart Light", "IoT-controlled LED light with adjustable brightness"))
-        devices.add(DeviceModel("Motion Detector", "Triggers events based on movement detection"))
+        loadDevicesFromJson()
+    }
+
+    private fun loadDevicesFromJson() {
+        try {
+            // Read the JSON file from assets
+            val jsonString = assets.open("devices.json")
+                .bufferedReader()
+                .use { it.readText() }
+
+            // Parse JSON array
+            val jsonArray = JSONArray(jsonString)
+
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val title = jsonObject.getString("title")
+                val description = jsonObject.getString("description")
+                devices.add(DeviceModel(title, description))
+            }
+
+            i("Loaded ${devices.size} devices from JSON")
+        } catch (ex: Exception) {
+            i("Error loading devices from JSON: ${ex.message}")
+        }
     }
 
 }
