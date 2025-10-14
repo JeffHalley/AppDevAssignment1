@@ -13,7 +13,7 @@ class DeviceActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
-    var app: MainApp? = null
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,9 +30,9 @@ class DeviceActivity : AppCompatActivity() {
 
             if (device.title.isNotEmpty() && device.description.isNotEmpty()) {
                 i("add Button Pressed: ${device.title}")
-                app!!.devices.add(device.copy())
-                for (i in app!!.devices.indices) {
-                    i("[$i] ${app!!.devices[i]}")
+                app.devices.add(device.copy())
+                for (i in app.devices.indices) {
+                    i("[$i] ${app.devices[i]}")
                 }
             } else {
                 Snackbar
