@@ -26,8 +26,12 @@
                 android:id="@+id/toolbarAdd"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:padding="8dp"
-                app:titleTextColor="@android:color/white" />
+                android:layout_gravity="center_vertical"
+                android:contentInsetStart="0dp"
+                android:contentInsetEnd="0dp"
+                android:padding="0dp"
+                app:titleTextColor="@android:color/white"
+                app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView

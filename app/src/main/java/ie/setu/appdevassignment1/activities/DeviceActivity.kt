@@ -1,8 +1,11 @@
 package ie.setu.appdevassignment1.activities
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import ie.setu.appdevassignment1.R
 import ie.setu.appdevassignment1.databinding.ActivityDeviceBinding
 import ie.setu.appdevassignment1.main.MainApp
 import ie.setu.appdevassignment1.models.DeviceModel
@@ -17,9 +20,11 @@ class DeviceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         binding = ActivityDeviceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
         i("Iot Device Activity started...")
@@ -43,4 +48,21 @@ class DeviceActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_device, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                // User pressed cancel
+                finish() // just closes this activity and goes back
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
