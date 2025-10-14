@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.appdevassignment1.databinding.ActivityDeviceBinding
+import ie.setu.appdevassignment1.main.MainApp
 import ie.setu.appdevassignment1.models.DeviceModel
 import timber.log.Timber
 import timber.log.Timber.i
@@ -12,15 +13,15 @@ class DeviceActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDeviceBinding
     var device = DeviceModel()
+    var app: MainApp? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+        super.onCreate(savedInstanceState)
         binding = ActivityDeviceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
-
+        app = application as MainApp
         i("Iot Device Activity started...")
 
         binding.btnAdd.setOnClickListener() {
@@ -29,7 +30,10 @@ class DeviceActivity : AppCompatActivity() {
 
             if (device.title.isNotEmpty() && device.description.isNotEmpty()) {
                 i("add Button Pressed: ${device.title}")
-                i("Add description button pressed: ${device.description} ")
+                app!!.devices.add(device.copy())
+                for (i in app!!.devices.indices) {
+                    i("[$i] ${app!!.devices[i]}")
+                }
             } else {
                 Snackbar
                     .make(it, "Incomplete Data", Snackbar.LENGTH_LONG)

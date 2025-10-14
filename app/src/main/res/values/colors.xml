@@ -5,7 +5,7 @@
     ...
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#026E8E</color>
+    <color name="colorAccent">#1976D2</color>
     ...
     <!-- Base application theme. -->
     <style name="Base.Theme.Placemark" parent="Theme.Material3.DayNight.NoActionBar">
