@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Iot Device</string>
+    <string name="app_name">Iot Devices</string>
     <string name="button_addDevice">Add Device</string>
     <string name="hint_DeviceTitle">Device Title</string>
     <string name="hint_DeviceDescription">Device Description</string>
+    <string name="menu_addDevice">Add</string>
 
 </resources>

@@ -34,6 +34,8 @@ class DeviceActivity : AppCompatActivity() {
                 for (i in app.devices.indices) {
                     i("[$i] ${app.devices[i]}")
                 }
+                setResult(RESULT_OK)
+                finish()
             } else {
                 Snackbar
                     .make(it, "Incomplete Data", Snackbar.LENGTH_LONG)
