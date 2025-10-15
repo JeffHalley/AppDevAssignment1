@@ -5,5 +5,7 @@
     <string name="hint_DeviceDescription">Device Description</string>
     <string name="menu_addDevice">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
 
 </resources>
