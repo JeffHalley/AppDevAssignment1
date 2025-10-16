@@ -35,10 +35,7 @@ class DeviceActivity : AppCompatActivity() {
 
             if (device.title.isNotEmpty() && device.description.isNotEmpty()) {
                 i("add Button Pressed: ${device.title}")
-                app.devices.add(device.copy())
-                for (i in app.devices.indices) {
-                    i("[$i] ${app.devices[i]}")
-                }
+                app.devices.create(device.copy())
                 setResult(RESULT_OK)
                 finish()
             } else {

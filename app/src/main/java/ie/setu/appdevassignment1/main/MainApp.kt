@@ -1,6 +1,7 @@
 package ie.setu.appdevassignment1.main
 
 import android.app.Application
+import ie.setu.appdevassignment1.models.DeviceMemStore
 import ie.setu.appdevassignment1.models.DeviceModel
 import org.json.JSONArray
 import timber.log.Timber
@@ -8,7 +9,7 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val devices = ArrayList<DeviceModel>()
+    val devices = DeviceMemStore()
 
     override fun onCreate() {
         super.onCreate()
@@ -32,10 +33,10 @@ class MainApp : Application() {
                 val jsonObject = jsonArray.getJSONObject(i)
                 val title = jsonObject.getString("title")
                 val description = jsonObject.getString("description")
-                devices.add(DeviceModel(title, description))
+                devices.create(DeviceModel(title, description))
             }
 
-            i("Loaded ${devices.size} devices from JSON")
+            i("Loaded ${devices.findAll().size} devices from JSON")
         } catch (ex: Exception) {
             i("Error loading devices from JSON: ${ex.message}")
         }
