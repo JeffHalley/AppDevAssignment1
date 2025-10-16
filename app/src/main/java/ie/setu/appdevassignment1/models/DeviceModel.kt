@@ -1,4 +1,11 @@
 package ie.setu.appdevassignment1.models
 
-data class DeviceModel(var title: String = "", var description: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+data class DeviceModel(
+    var id: Long = 0,
+    var title: String,
+    var description: String,
+) : Parcelable

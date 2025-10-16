@@ -60,8 +60,7 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
 
     override fun onDeviceClick(device: DeviceModel) {
         val launcherIntent = Intent(this, DeviceActivity::class.java)
-        launcherIntent.putExtra("title", device.title)
-        launcherIntent.putExtra("description", device.description)
+        launcherIntent.putExtra("device_edit", device)
         getClickResult.launch(launcherIntent)
     }
 
