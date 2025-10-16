@@ -31,6 +31,14 @@ class DeviceMemStore : DeviceStore {
         }
     }
 
+    override fun delete(device: DeviceModel) {
+        // Remove the device from the list by matching its ID
+        devices.removeAll { it.id == device.id }
+        logAll()
+    }
+
+
+
     private fun logAll() {
         devices.forEach { i("$it") }
     }

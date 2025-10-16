@@ -49,6 +49,14 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onDeviceDelete(device: DeviceModel) {
+        val position = app.devices.findAll().indexOf(device)
+        if (position != -1) {
+            app.devices.delete(device)
+            binding.recyclerView.adapter?.notifyItemRemoved(position)
+        }
+        }
+
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()

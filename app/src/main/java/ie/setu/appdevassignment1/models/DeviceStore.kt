@@ -5,4 +5,6 @@ interface DeviceStore {
     fun update(device: DeviceModel)
     fun findAll(): List<DeviceModel>
     fun create(device: DeviceModel)
+    fun delete(device: DeviceModel)  // Add this
+
 }

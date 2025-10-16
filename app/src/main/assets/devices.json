@@ -1,21 +1,26 @@
 [
   {
+    "id": 1,
     "title": "Temperature Sensor",
     "description": "Monitors ambient temperature in real time"
   },
   {
+    "id": 2,
     "title": "pH Sensor",
     "description": "Measures water acidity for environmental monitoring"
   },
   {
+    "id": 3,
     "title": "Ultrasonic Sensor",
     "description": "Used for distance and obstacle detection"
   },
   {
+    "id": 4,
     "title": "Smart Light",
     "description": "IoT-controlled LED light with adjustable brightness"
   },
   {
+    "id": 5,
     "title": "Motion Detector",
     "description": "Triggers events based on movement detection"
   }

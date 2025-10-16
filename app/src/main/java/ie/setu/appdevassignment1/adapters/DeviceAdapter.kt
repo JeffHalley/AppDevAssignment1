@@ -8,6 +8,7 @@ import ie.setu.appdevassignment1.models.DeviceModel
 
 interface DeviceListener {
     fun onDeviceClick(device: DeviceModel)
+    fun onDeviceDelete(device: DeviceModel)
 }
 
 class DeviceAdapter(
@@ -34,9 +35,16 @@ class DeviceAdapter(
         fun bind(device: DeviceModel, listener: DeviceListener) {
             binding.deviceTitle.text = device.title
             binding.deviceDescription.text = device.description
+            // Only trigger edit when the button is clicked
+            binding.btnEditCard.setOnClickListener {
+                listener.onDeviceClick(device)
+            }
+            // future feature
+            binding.btnDeleteCard.setOnClickListener {
+                listener.onDeviceDelete(device)  // Call the listener
+            }
 
-            // Handle click on the entire card
-            binding.root.setOnClickListener { listener.onDeviceClick(device) }
+
 
 
         }

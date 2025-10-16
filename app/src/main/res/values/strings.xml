@@ -7,6 +7,6 @@
     <string name="cancel">Cancel</string>
     <string name="delete">delete</string>
     <string name="edit">edit</string>
-    <string name="save_device">Save Device</string>
+    <string name="update_device">Update Device</string>
 
 </resources>

@@ -1,10 +1,11 @@
 package ie.setu.appdevassignment1.main
 
 import android.app.Application
+import com.github.ajalt.timberkt.Timber
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import ie.setu.appdevassignment1.models.DeviceMemStore
 import ie.setu.appdevassignment1.models.DeviceModel
-import org.json.JSONArray
-import timber.log.Timber
 import timber.log.Timber.i
 
 class MainApp : Application() {
@@ -21,25 +22,19 @@ class MainApp : Application() {
 
     private fun loadDevicesFromJson() {
         try {
-            // Read the JSON file from assets
             val jsonString = assets.open("devices.json")
                 .bufferedReader()
                 .use { it.readText() }
 
-            // Parse JSON array
-            val jsonArray = JSONArray(jsonString)
+            val gson = Gson()
+            val listType = object : TypeToken<List<DeviceModel>>() {}.type
+            val deviceList: List<DeviceModel> = gson.fromJson(jsonString, listType)
 
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val title = jsonObject.getString("title")
-                val description = jsonObject.getString("description")
-                devices.create(DeviceModel(title, description))
-            }
+            deviceList.forEach { devices.create(it) }
 
             i("Loaded ${devices.findAll().size} devices from JSON")
         } catch (ex: Exception) {
             i("Error loading devices from JSON: ${ex.message}")
         }
     }
-
 }
