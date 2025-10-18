@@ -36,18 +36,17 @@ class DeviceAdapter(
             // Set the device title
             binding.deviceTitle.text = device.title
 
-// Set the activated date with default
+            // Set the activated date with default
             binding.deviceActivatedAt.text = device.activatedAt.ifEmpty {
                 "Not Date available"
             }
 
-// Set the sensor family with default
+            // Set the sensor family with default
             binding.deviceSensorFamily.text = device.sensorFamily.ifEmpty {
                 "no family available"
             }
 
 
-            // Set the status indicator color: green if active, red if inactive
             val colorRes =
                 if (device.status) android.R.color.holo_green_light else android.R.color.holo_red_light
             binding.statusIndicator.background.setTint(

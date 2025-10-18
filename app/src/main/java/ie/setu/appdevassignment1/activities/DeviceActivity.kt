@@ -85,7 +85,7 @@ class DeviceActivity : AppCompatActivity() {
                 device.activatedAt = dateFormat.format(Date())
             }
 
-            if (device.title.isNotEmpty() || device.description.isNotEmpty()) {
+            if (device.title.isNotEmpty() && device.description.isNotEmpty()) {
                 if (intent.hasExtra("device_edit")) {
                     app.devices.update(device)
                     i("Updated device: $device")

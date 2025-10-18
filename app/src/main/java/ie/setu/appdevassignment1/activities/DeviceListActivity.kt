@@ -46,13 +46,16 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
                 val launcherIntent = Intent(this, DeviceActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+
             R.id.item_delete_all -> {
                 AlertDialog.Builder(this)
                     .setTitle("Delete All Devices")
                     .setMessage("Are you sure?")
                     .setPositiveButton("Yes") { _, _ ->
                         app.devices.deleteAll()
-                        binding.recyclerView.adapter?.notifyDataSetChanged()
+                        val adapter = binding.recyclerView.adapter
+
+                        adapter?.notifyDataSetChanged()
                     }
                     .setNegativeButton("No", null)
                     .show()
@@ -65,16 +68,27 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
         val position = app.devices.findAll().indexOf(device)
         if (position != -1) {
             app.devices.delete(device)
-            binding.recyclerView.adapter?.notifyItemRemoved(position)
+
+            val adapter = binding.recyclerView.adapter
+            if (app.devices.findAll().isEmpty()) {
+                // If list is now empty, notify full change
+                adapter?.notifyDataSetChanged()
+            } else {
+                // Otherwise, notify the removed position
+                adapter?.notifyItemRemoved(position)
+            }
         }
-        }
+    }
 
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.devices.findAll().size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(
+                    0,
+                    app.devices.findAll().size
+                )
             }
         }
 
@@ -89,7 +103,10 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == Activity.RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.devices.findAll().size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(
+                    0,
+                    app.devices.findAll().size
+                )
             }
         }
 }
