@@ -2,26 +2,41 @@
   {
     "id": 1,
     "title": "Temperature Sensor",
-    "description": "Monitors ambient temperature in real time"
+    "description": "Monitors ambient temperature in real time",
+    "status": true,
+    "activatedAt": "2025-01-10T09:30:00Z",
+    "sensorFamily": "Temperature"
   },
   {
     "id": 2,
     "title": "pH Sensor",
-    "description": "Measures water acidity for environmental monitoring"
+    "description": "Measures water acidity for environmental monitoring",
+    "status": true,
+    "activatedAt": "2024-06-15T14:00:00Z",
+    "sensorFamily": "pH"
   },
   {
     "id": 3,
     "title": "Ultrasonic Sensor",
-    "description": "Used for distance and obstacle detection"
+    "description": "Used for distance and obstacle detection",
+    "status": false,
+    "activatedAt": "2025-03-01T08:15:00Z",
+    "sensorFamily": "Ultrasonic"
   },
   {
     "id": 4,
     "title": "Smart Light",
-    "description": "IoT-controlled LED light with adjustable brightness"
+    "description": "IoT-controlled LED light with adjustable brightness",
+    "status": true,
+    "activatedAt": "2023-11-05T19:45:00Z",
+    "sensorFamily": "Lighting"
   },
   {
     "id": 5,
     "title": "Motion Detector",
-    "description": "Triggers events based on movement detection"
+    "description": "Triggers events based on movement detection",
+    "status": false,
+    "activatedAt": "2025-09-20T07:20:00Z",
+    "sensorFamily": "Motion"
   }
 ]

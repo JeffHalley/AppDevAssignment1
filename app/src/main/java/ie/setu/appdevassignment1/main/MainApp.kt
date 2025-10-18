@@ -10,31 +10,14 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val devices = DeviceMemStore()
+    lateinit var devices: DeviceMemStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Device app started")
 
-        loadDevicesFromJson()
-    }
-
-    private fun loadDevicesFromJson() {
-        try {
-            val jsonString = assets.open("devices.json")
-                .bufferedReader()
-                .use { it.readText() }
-
-            val gson = Gson()
-            val listType = object : TypeToken<List<DeviceModel>>() {}.type
-            val deviceList: List<DeviceModel> = gson.fromJson(jsonString, listType)
-
-            deviceList.forEach { devices.create(it) }
-
-            i("Loaded ${devices.findAll().size} devices from JSON")
-        } catch (ex: Exception) {
-            i("Error loading devices from JSON: ${ex.message}")
-        }
+        devices = DeviceMemStore(this)
+        devices.load()
     }
 }

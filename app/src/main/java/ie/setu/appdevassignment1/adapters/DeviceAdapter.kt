@@ -33,20 +33,39 @@ class DeviceAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(device: DeviceModel, listener: DeviceListener) {
+            // Set the device title
             binding.deviceTitle.text = device.title
-            binding.deviceDescription.text = device.description
-            // Only trigger edit when the button is clicked
+
+// Set the activated date with default
+            binding.deviceActivatedAt.text = device.activatedAt.ifEmpty {
+                "Not Date available"
+            }
+
+// Set the sensor family with default
+            binding.deviceSensorFamily.text = device.sensorFamily.ifEmpty {
+                "no family available"
+            }
+
+
+            // Set the status indicator color: green if active, red if inactive
+            val colorRes =
+                if (device.status) android.R.color.holo_green_light else android.R.color.holo_red_light
+            binding.statusIndicator.background.setTint(
+                binding.root.context.resources.getColor(
+                    colorRes,
+                    null
+                )
+            )
+
+            // Edit button click
             binding.btnEditCard.setOnClickListener {
                 listener.onDeviceClick(device)
             }
-            // future feature
+
+            // Delete button click
             binding.btnDeleteCard.setOnClickListener {
-                listener.onDeviceDelete(device)  // Call the listener
+                listener.onDeviceDelete(device)
             }
-
-
-
-
         }
     }
 }
