@@ -45,31 +45,60 @@ class DeviceMemStore(private val context: Context) : DeviceStore {
         logAll()
     }
 
+    fun deleteAll() {
+        devices.clear()
+        save()
+        logAll()
+    }
+
     fun load() {
+        i("Starting load of devices...")
+
         if (jsonFile.exists()) {
+            i("Internal JSON file exists at: ${jsonFile.absolutePath}")
+
             val jsonString = jsonFile.readText()
-            devices = gson.fromJson(jsonString, listType)
-            i("Loaded ${devices.size} devices from internal JSON")
+            if (jsonString.isBlank() || jsonString.trim() == "[]") {
+                i("Internal JSON file is empty. Loading from assets instead.")
+                loadFromAssets()
+            } else {
+                try {
+                    devices = gson.fromJson(jsonString, listType)
+                    i("Loaded ${devices.size} devices from internal JSON")
+                } catch (ex: Exception) {
+                    i("Error parsing internal JSON: ${ex.message}. Falling back to assets.")
+                    loadFromAssets()
+                }
+            }
         } else {
-            i("No internal JSON file found, loading from assets")
+            i("Internal JSON file does not exist. Loading from assets")
             loadFromAssets()
         }
     }
 
     private fun loadFromAssets() {
         try {
-            val assetJson =
-                context.assets.open("devices.json").bufferedReader().use { it.readText() }
+            i("Opening devices.json from assets...")
+            val assetJson = context.assets.open("devices.json").bufferedReader().use { it.readText() }
+            if (assetJson.isBlank()) {
+                i("Error: assets/devices.json is empty!")
+                return
+            }
+
             devices = gson.fromJson(assetJson, listType)
-            save() // Save it to internal storage for future edits
             i("Seeded ${devices.size} devices from assets")
+
+            // Save to internal storage for future edits
+            save()
         } catch (ex: Exception) {
             i("Error reading devices from assets: ${ex.message}")
         }
     }
 
+
     private fun save() {
-        jsonFile.writeText(gson.toJson(devices))
+        val json = gson.toJson(devices)
+        jsonFile.writeText(json)
         i("Saved ${devices.size} devices to ${jsonFile.absolutePath}")
     }
 

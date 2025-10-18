@@ -1,6 +1,7 @@
 package ie.setu.appdevassignment1.activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -44,6 +45,17 @@ class DeviceListActivity : AppCompatActivity(), DeviceListener {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, DeviceActivity::class.java)
                 getResult.launch(launcherIntent)
+            }
+            R.id.item_delete_all -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Delete All Devices")
+                    .setMessage("Are you sure?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        app.devices.deleteAll()
+                        binding.recyclerView.adapter?.notifyDataSetChanged()
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
             }
         }
         return super.onOptionsItemSelected(item)
